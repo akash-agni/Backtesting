@@ -1,5 +1,11 @@
 # data files
-./data/*
+data/*
 
 # env
-./.venv/*
+.venv
+
+*__pycache__/*
+
+# images
+*.png
+*.jpeg

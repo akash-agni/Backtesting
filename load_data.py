@@ -6,7 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def load_csv_data(filename: str, reverse: bool=False) -> pd.DataFrame:
+def load_csv_data(filename: str, reverse: bool=False, date_col: str="DATE") -> pd.DataFrame:
     """Load csv data and return a dataframe."""
 
     filepath = os.path.join(os.curdir, "data", filename)
@@ -18,5 +18,9 @@ def load_csv_data(filename: str, reverse: bool=False) -> pd.DataFrame:
         data = data.iloc[::-1]
         data = data.reset_index()
         data = data.drop("index", axis=1)
+
+    data = data.rename(columns={col: col.upper() for col in data.columns})
+
+    data[date_col] = pd.to_datetime(data[date_col])
         
     return data
